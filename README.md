@@ -18,8 +18,6 @@ Proyek ini diajukan untuk kompetisi **SOFTCOMPT 2026** oleh tim **Devitra.id**.
 Website ini dibangun menggunakan ekosistem web modern untuk memastikan performa dan skalabilitas:
 * **Frontend Library:** [React.js](https://reactjs.org/)
 * **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-//Peding* **Icons:** Lucide React / FontAwesome
-//Peding* **Deployment:** [Vercel/Netlify]
 
 ---
 
