@@ -42,3 +42,52 @@ SiberAman/
 │   └── App.js           # Main Entry Point
 ├── README.md            # Dokumentasi proyek
 └── package.json         # Dependensi proyek
+
+---
+
+## ⚙️ Cara Menjalankan Proyek Secara Lokal
+
+1. Clone repository ini:
+```bash
+git clone [https://github.com/AnFariq/SiMan.git](https://github.com/AnFariq/SiMan.git)
+
+```
+
+
+2. Masuk ke direktori proyek:
+```bash
+cd SiMan
+
+```
+
+
+3. Install dependensi:
+```bash
+npm install
+
+```
+
+
+4. Jalankan aplikasi:
+```bash
+npm start
+
+```
+
+
+
+Aplikasi akan berjalan di `http://localhost:5173`.
+
+---
+
+## 📄 Lisensi
+
+Hak kepemilikan karya tetap berada pada peserta, dengan ketentuan panitia **TECHSOFT 2026** berhak melakukan dokumentasi dan publikasi sebagai bagian dari dokumentasi kegiatan.
+
+---
+
+**Devitra.id** - *Innovate, Secure, and Educate.*
+
+```
+
+---
