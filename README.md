@@ -87,5 +87,3 @@ Hak kepemilikan karya tetap berada pada peserta, dengan ketentuan panitia **TECH
 ---
 
 **Devitra.id** - *Innovate, Secure, and Educate.*
-
----
