@@ -30,12 +30,7 @@ export default function Footer() {
             <p className="text-sm text-slate-500 leading-relaxed mb-6">
               Pusat panduan dan edukasi celah keamanan sistem untuk masyarakat Indonesia. Dibangun dengan standar dokumentasi modern.
             </p>
-            <div className="flex items-center gap-3">
-              <SocialIcon icon={<Github className="w-4 h-4" />} />
-              <SocialIcon icon={<Twitter className="w-4 h-4" />} />
-              <SocialIcon icon={<Youtube className="w-4 h-4" />} />
-              <SocialIcon icon={<Mail className="w-4 h-4" />} />
-            </div>
+
           </div>
 
           {/* Links Columns */}
