@@ -47,7 +47,7 @@ SiberAman/
 
 1. Clone repository ini:
 ```bash
-git clone [https://github.com/AnFariq/SiMan.git](https://github.com/AnFariq/SiMan.git)
+git clone https://github.com/AnFariq/SiMan.git
 
 ```
 
