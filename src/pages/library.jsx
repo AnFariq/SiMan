@@ -19,7 +19,7 @@ export default function Library() {
       <Header />
 
       {/* Hero Section Library */}
-      <section className="bg-slate-50 border-b border-slate-100 py-16 px-6">
+      <section className="bg-slate-50 border-b border-slate-100 py-25 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-wider mb-4">
             <BookOpen className="w-3 h-3" />

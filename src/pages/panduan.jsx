@@ -14,7 +14,7 @@ export default function PanduanLengkap() {
     return (
         <div className="min-h-screen bg-white flex flex-col font-sans selection:bg-indigo-100">
             <Header />
-            <main className="flex-1 max-w-4xl mx-auto w-full px-6 py-20">
+            <main className="flex-1 max-w-4xl mx-auto w-full px-6 py-25">
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}

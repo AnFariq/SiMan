@@ -1,90 +1,88 @@
 import React, { useState, useEffect } from "react";
-import { ShieldCheck } from "lucide-react";
+import { Database, Search, FileText, Layout } from "lucide-react";
 
 export default function LoadingSingkat() {
-  const [seconds, setSeconds] = useState(1);
+  const [progress, setProgress] = useState(0);
 
-  // Logika Timer Mundur
   useEffect(() => {
-    if (seconds > 0) {
-      const timer = setTimeout(() => setSeconds(seconds - 1), 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [seconds]);
+    const interval = setInterval(() => {
+      setProgress((prev) => (prev < 100 ? prev + 10 : 100));
+    }, 80);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center relative overflow-hidden">
+    /* PERBAIKAN: Menggunakan 'fixed inset-0' dan 'z-[9999]' agar loading 
+       melayang di atas konten artikel dan tidak mendorong layout ke bawah */
+    <div className="fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center overflow-hidden">
       
       {/* Background Decor */}
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-40 -z-10" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] -z-10" />
 
-      <div className="relative flex flex-col items-center">
+      <div className="relative flex flex-col items-center max-w-sm w-full px-8">
         
-        {/* Animated Logo Container */}
-        <div className="relative mb-10 group">
-          <div className="absolute -inset-4 border-2 border-indigo-50 border-t-indigo-600 rounded-full animate-spin [animation-duration:1.5s]"></div>
-          
-          <div className="relative w-20 h-20 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-xl shadow-indigo-100">
-            <ShieldCheck className="w-10 h-10 text-indigo-600 animate-pulse" />
+        {/* Scanning Animation Area */}
+        <div className="relative mb-12 w-24 h-24">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Database className="w-10 h-10 text-indigo-600 animate-[bounce_2s_infinite]" />
           </div>
+          
+          <div className="absolute inset-0 border-2 border-indigo-100 rounded-full animate-ping opacity-20"></div>
+          <div className="absolute inset-0 border-4 border-indigo-600/10 rounded-full border-t-indigo-600 animate-spin"></div>
         </div>
 
-        {/* Branding & Status */}
-        <div className="text-center space-y-4">
-          <div className="flex flex-col items-center">
-            <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
-              Siber<span className="text-indigo-600">Aman</span>
+        {/* Branding & Status Info */}
+        <div className="text-center w-full space-y-6">
+          <div className="space-y-1">
+            <h2 className="text-sm font-black text-slate-900 uppercase tracking-[0.3em]">
+              Fetching <span className="text-indigo-600">Article</span>
             </h2>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">
-                Secure Connection
-              </p>
+            <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
+              Devitra Technical Database
+            </p>
+          </div>
+
+          {/* Progress Section */}
+          <div className="space-y-3">
+            <div className="flex justify-between items-end">
+              <span className="text-[10px] font-mono font-bold text-indigo-600 flex items-center gap-1">
+                <Search className="w-3 h-3" /> ANALYZING_RESOURCES...
+              </span>
+              <span className="text-xs font-mono font-black text-slate-900">
+                {progress}%
+              </span>
+            </div>
+            
+            <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden p-[2px] border border-slate-200 shadow-inner">
+              <div 
+                className="h-full bg-indigo-600 rounded-full transition-all duration-150 ease-out shadow-[0_0_12px_rgba(79,70,229,0.5)]"
+                style={{ width: `${progress}%` }}
+              ></div>
             </div>
           </div>
 
-          {/* Tampilan Timer */}
-          <div className="mt-6 flex flex-col items-center">
-            <span className="text-3xl font-mono font-black text-indigo-600 tabular-nums">
-              {seconds < 1 ? `${seconds}` : seconds}
-            </span>
-            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">
-              Seconds Remaining
-            </span>
-          </div>
-
-          {/* Progress Bar Minimalis */}
-          <div className="w-48 h-1 bg-slate-100 rounded-full overflow-hidden relative">
-            <div className="absolute inset-y-0 bg-indigo-600 rounded-full animate-progressLine"></div>
-          </div>
-
-          {/* Loading Text */}
-          <div className="flex flex-col gap-1">
-            <p className="text-slate-500 text-xs font-medium animate-bounce">
-              Memuat Database Celah Keamanan...
-            </p>
-            <p className="text-slate-300 text-[10px] font-mono italic">
-              Devitra.id Environment v1.0
-            </p>
+          {/* Activity Log */}
+          <div className="flex items-center justify-center gap-4 py-3 border-y border-slate-100">
+            <div className="flex items-center gap-1.5">
+              <FileText className="w-3.5 h-3.5 text-slate-300" />
+              <span className="text-[9px] font-bold text-slate-400">INDEXING</span>
+            </div>
+            <div className="w-1 h-1 rounded-full bg-slate-200"></div>
+            <div className="flex items-center gap-1.5">
+              <Layout className="w-3.5 h-3.5 text-slate-300" />
+              <span className="text-[9px] font-bold text-slate-400">RENDERING</span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Footer Loading */}
-      <div className="absolute bottom-10">
-        <p className="text-slate-300 text-[10px] uppercase tracking-widest font-bold">
-          Defense Platform
-        </p>
+      {/* Security Token Label */}
+      <div className="absolute bottom-12 flex flex-col items-center gap-2">
+        <div className="px-3 py-1 rounded-lg border border-slate-200 bg-white shadow-sm flex items-center gap-2">
+          <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div>
+          <span className="text-[9px] font-mono font-bold text-slate-500 tracking-tight">TOKEN: SECURED_ENVIRONMENT</span>
+        </div>
       </div>
-
-      {/* Keyframes Custom */}
-      <style>{`
-        @keyframes progressLine {
-          0% { left: -40%; width: 40%; }
-          50% { left: 40%; width: 60%; }
-          100% { left: 100%; width: 40%; }
-        }
-      `}</style>
     </div>
   );
 }
