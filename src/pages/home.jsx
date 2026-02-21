@@ -9,21 +9,19 @@ export default function Home() {
     const [isIntroFinished, setIsIntroFinished] = useState(false);
 
     useEffect(() => {
-        // Jika loading sedang aktif, kunci scroll pada body
         if (!isIntroFinished) {
             document.body.style.overflow = 'hidden';
         } else {
-            // Jika loading selesai, kembalikan scroll ke normal
             document.body.style.overflow = 'unset';
         }
 
         const timer = setTimeout(() => {
             setIsIntroFinished(true);
-        }, 5000); // 10 detik sesuai permintaan
+        }, 5000);
 
         return () => {
             clearTimeout(timer);
-            document.body.style.overflow = 'unset'; // Cleanup agar tidak terkunci permanen
+            document.body.style.overflow = 'unset';
         };
     }, [isIntroFinished]);
 
@@ -43,7 +41,6 @@ export default function Home() {
                 )}
             </AnimatePresence>
 
-            {/* Konten Home hanya muncul setelah loading selesai */}
             {isIntroFinished && (
                 <motion.div 
                     initial={{ opacity: 0, y: 10 }} 
