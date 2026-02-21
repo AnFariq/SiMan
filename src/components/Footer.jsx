@@ -1,90 +1,89 @@
+import React from "react";
+import { Link } from "react-router-dom";
 import { 
   ShieldCheck, 
+  Instagram, 
+  Linkedin, 
   Github, 
-  Twitter, 
-  Youtube, 
   Mail, 
-  ExternalLink,
-  Lock,
-  ArrowUpRight
+  ChevronRight,
+  Globe
 } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-slate-100 pt-16 pb-8">
+    <footer className="bg-slate-50 border-t border-slate-100 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           
           {/* Brand Column */}
           <div className="col-span-1 md:col-span-1">
-            <a href="/" className="flex items-center gap-2.5 mb-6 group">
-              <ShieldCheck className="w-6 h-6 text-indigo-600" />
+            <Link to="/" className="flex items-center gap-2 mb-6 group">
+              <div className="p-1.5 bg-indigo-600 rounded-lg shadow-lg shadow-indigo-200">
+                <ShieldCheck className="w-5 h-5 text-white" />
+              </div>
               <span className="text-xl font-bold text-slate-900 tracking-tight">
                 Siber<span className="text-indigo-600">Aman</span>
               </span>
-            </a>
-            <p className="text-sm text-slate-500 leading-relaxed mb-6">
-              Pusat panduan dan edukasi celah keamanan sistem untuk masyarakat Indonesia. Dibangun dengan standar dokumentasi modern.
+            </Link>
+            <p className="text-slate-500 text-sm leading-relaxed mb-6 font-medium">
+              Platform edukasi keamanan siber terpercaya untuk masyarakat Indonesia. Membangun pertahanan digital dimulai dari kesadaran diri sendiri.
             </p>
-
           </div>
 
-          {/* Links Columns */}
-          <div className="md:ml-auto">
-            <h4 className="text-slate-900 font-bold mb-6 text-sm uppercase tracking-wider">Navigasi</h4>
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-slate-900 font-bold text-sm uppercase tracking-widest mb-6">Navigasi</h4>
             <ul className="space-y-4">
-              <FooterLink label="Beranda" href="/" />
-              <FooterLink label="Panduan Celah" href="/ancaman" />
-              <FooterLink label="Tentang Kami" href="/tentang" />
-              <FooterLink label="Library" href="/materi" />
+              <FooterLink to="/" label="Beranda" />
+              <FooterLink to="/library" label="Library Artikel" />
+              <FooterLink to="/panduan-umum" label="Panduan Umum" />
+              <FooterLink to="/tentang" label="Tentang Kami" />
             </ul>
           </div>
 
-          <div className="md:ml-auto">
-            <h4 className="text-slate-900 font-bold mb-6 text-sm uppercase tracking-wider">Sumber Daya</h4>
+          {/* Categories */}
+          <div>
+            <h4 className="text-slate-900 font-bold text-sm uppercase tracking-widest mb-6">Kategori Utama</h4>
             <ul className="space-y-4">
-              <FooterLink label="Dokumentasi" href="#" />
-              <FooterLink label="Cara Mengatasi" href="#" />
-              <FooterLink label="Laporan Isu" href="#" isExternal />
-              <FooterLink label="Komunitas" href="#" isExternal />
+              <FooterLink to="/category/social-engineering" label="Social Engineering" />
+              <FooterLink to="/category/web-vulnerability" label="Web Vulnerability" />
+              <FooterLink to="/category/network-security" label="Network Security" />
+              <FooterLink to="/category/malware-analysis" label="Malware Analysis" />
             </ul>
           </div>
 
-          {/* Status Column - Light Version */}
-          <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-            <h4 className="text-slate-900 font-bold mb-4 text-sm flex items-center gap-2">
-              <Lock className="w-4 h-4 text-indigo-600" />
-              Status Update
-            </h4>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></div>
-              <span className="text-xs text-slate-700 font-semibold">Database Terupdate</span>
+          {/* Legal & Contact */}
+          <div>
+            <h4 className="text-slate-900 font-bold text-sm uppercase tracking-widest mb-6">Legal & Kontak</h4>
+            <ul className="space-y-4 mb-6">
+              <FooterLink to="/privacy-policy" label="Kebijakan Privasi" />
+              <FooterLink to="/privacy-policy" label="Syarat & Ketentuan" />
+            </ul>
+            <div className="p-4 bg-white border border-slate-200 rounded-2xl shadow-sm">
+              <div className="flex items-center gap-3 text-slate-600 mb-2">
+                <Mail className="w-4 h-4 text-indigo-600" />
+                <span className="text-xs font-bold">devitra.first@gmail.com</span>
+              </div>
+              <div className="flex items-center gap-3 text-slate-600">
+                <Globe className="w-4 h-4 text-indigo-600" />
+                <span className="text-xs font-bold">Surabaya, Indonesia</span>
+              </div>
             </div>
-            <p className="text-[12px] text-slate-500 leading-relaxed">
-              Tim <span className="text-slate-900 font-medium">Devitra.id</span> memperbarui data kerentanan setiap minggu untuk memastikan panduan tetap relevan.
-            </p>
           </div>
+
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-[13px] text-slate-500 flex flex-col md:flex-row items-center gap-2 md:gap-6">
-            <span>© {currentYear} SiberAman oleh <span className="text-slate-900 font-semibold underline decoration-indigo-500/30 underline-offset-4">Devitra.id</span></span>
-            <div className="flex gap-4 font-medium">
-              <a href="#" className="hover:text-indigo-600 transition-colors">Privasi</a>
-              <a href="#" className="hover:text-indigo-600 transition-colors">Ketentuan</a>
-            </div>
-          </div>
-          
-          <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 rounded-full border border-slate-100">
-            <div className="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
-            <span className="text-[10px] font-bold text-slate-600 uppercase tracking-[0.1em]">
-              Verified Education Content
-            </span>
+        <div className="pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-slate-400 text-xs font-medium">
+            © {currentYear} <span className="text-slate-900 font-bold">Devitra.id</span>. Hak Cipta Dilindungi.
+          </p>
+          <div className="flex items-center gap-2">
+             <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Sistem Terenkripsi SSL</span>
           </div>
         </div>
       </div>
@@ -92,23 +91,28 @@ export default function Footer() {
   );
 }
 
-function FooterLink({ label, href, isExternal }) {
+// Sub-komponen untuk Link Footer
+function FooterLink({ to, label }) {
   return (
     <li>
-      <a 
-        href={href} 
-        className="text-sm text-slate-500 hover:text-indigo-600 font-medium flex items-center gap-1 transition-colors group"
+      <Link 
+        to={to} 
+        className="text-slate-500 hover:text-indigo-600 text-sm font-medium flex items-center gap-1 transition-all hover:translate-x-1"
       >
+        <ChevronRight className="w-3 h-3 opacity-0 group-hover:opacity-100" />
         {label}
-        {isExternal && <ArrowUpRight className="w-3 h-3 opacity-40 group-hover:opacity-100 transition-opacity" />}
-      </a>
+      </Link>
     </li>
   );
 }
 
-function SocialIcon({ icon }) {
+// Sub-komponen untuk Social Icons
+function SocialIcon({ icon, href }) {
   return (
-    <a href="#" className="p-2.5 bg-white border border-slate-200 rounded-xl text-slate-400 hover:text-indigo-600 hover:border-indigo-600/30 hover:bg-indigo-50 transition-all shadow-sm">
+    <a 
+      href={href} 
+      className="w-10 h-10 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-100 hover:shadow-lg hover:shadow-indigo-50 transition-all active:scale-90"
+    >
       {icon}
     </a>
   );

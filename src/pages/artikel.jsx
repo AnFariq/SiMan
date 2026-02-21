@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from "react-router-dom";
 import { siberAmanData } from "../data/DataSheet";
 import { motion, AnimatePresence } from "framer-motion";
-import LoadingOption from "../components/LoadingOption";
+import LoadingSingkat from "../components/LoadingSingkat";
 import { ArrowLeft, ShieldCheck, AlertOctagon, CheckCircle2, Clock } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -11,19 +11,17 @@ export default function ContentPage() {
   const { id } = useParams();
   const [isIntroFinished, setIsIntroFinished] = useState(false);
   useEffect(() => {
-    // Jika loading sedang aktif, kunci scroll pada body
     if (!isIntroFinished) {
       document.body.style.overflow = 'hidden';
     } else {
-      // Jika loading selesai, kembalikan scroll ke normal
       document.body.style.overflow = 'unset';
     }
     const timer = setTimeout(() => {
       setIsIntroFinished(true);
-    }, 5000); // 10 detik sesuai permintaan
+    }, 1000);
     return () => {
       clearTimeout(timer);
-      document.body.style.overflow = 'unset'; // Cleanup agar tidak terkunci permanen
+      document.body.style.overflow = 'unset';
     };
   }, [isIntroFinished]);
 
@@ -61,7 +59,7 @@ export default function ContentPage() {
             transition={{ duration: 0.8 }}
             className="fixed inset-0 z-[9999] bg-white"
           >
-            <LoadingOption onComplete={() => setIsIntroFinished(true)} />
+            <LoadingSingkat onComplete={() => setIsIntroFinished(true)} />
           </motion.div>
         )}
       </AnimatePresence>
