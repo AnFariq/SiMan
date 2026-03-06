@@ -60,6 +60,7 @@ export default function Home() {
                     className="min-h-screen bg-[#FAFAFB] flex flex-col font-sans selection:bg-indigo-600 selection:text-white"
                 >
                     <Header />
+                    
 
                     <div className="relative">
                         <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
