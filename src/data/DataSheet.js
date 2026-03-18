@@ -245,7 +245,7 @@ export const siberAmanData = [
   },
   {
     id: 11,
-    kategori: "Keamanan Perangkat & Malware",
+    kategori: "Malware Analysis",
     judul: "Ransomware Locky: Cara Kerja Enkripsi Data",
     image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800",
     deskripsi:
@@ -269,7 +269,7 @@ export const siberAmanData = [
   },
   {
     id: 12,
-    kategori: "Keamanan Perangkat & Malware",
+    kategori: "Malware Analysis",
     judul: "Spyware: Penyadapan Kamera dan Mikrofon HP",
     image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800",
     deskripsi:
@@ -293,7 +293,7 @@ export const siberAmanData = [
   },
   {
     id: 13,
-    kategori: "Keamanan Perangkat & Malware",
+    kategori: "Malware Analysis",
     judul: "Keylogger: Pencurian Data Lewat Ketikan Keyboard",
     image: "https://images.unsplash.com/photo-1587573089734-09cb69c0f2b4?w=800",
     deskripsi:
@@ -317,7 +317,7 @@ export const siberAmanData = [
   },
   {
     id: 14,
-    kategori: "Keamanan Perangkat & Malware",
+    kategori: "Malware Analysis",
     judul: "Trojan Horse: Bahaya Software Crack/Bajakan",
     image:
       "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -342,7 +342,7 @@ export const siberAmanData = [
   },
   {
     id: 15,
-    kategori: "Keamanan Perangkat & Malware",
+    kategori: "Malware Analysis",
     judul: "Adware: Iklan Agresif yang Mencuri Data Browser",
     image:
       "https://dibimbing-cdn.sgp1.cdn.digitaloceanspaces.com/1742966333056-adware-adalah.webp",
@@ -367,7 +367,7 @@ export const siberAmanData = [
   },
   {
     id: 16,
-    kategori: "Keamanan Perangkat & Malware",
+    kategori: "Malware Analysis",
     judul: "Rootkit: Malware yang Bersembunyi di Level Kernel",
     image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800",
     deskripsi:
@@ -391,7 +391,7 @@ export const siberAmanData = [
   },
   {
     id: 17,
-    kategori: "Keamanan Perangkat & Malware",
+    kategori: "Malware Analysis",
     judul: "Bloatware: Aplikasi Bawaan yang Menjadi Celah Keamanan",
     image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800",
     deskripsi:
@@ -415,7 +415,7 @@ export const siberAmanData = [
   },
   {
     id: 18,
-    kategori: "Keamanan Perangkat & Malware",
+    kategori: "Malware Analysis",
     judul: "Risiko Keamanan Rooting Android & Jailbreak iOS",
     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800",
     deskripsi:
@@ -439,7 +439,7 @@ export const siberAmanData = [
   },
   {
     id: 19,
-    kategori: "Keamanan Perangkat & Malware",
+    kategori: "Malware Analysis",
     judul: "Pentingnya Update Patch Keamanan OS Secara Rutin",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800",
     deskripsi:
@@ -463,7 +463,7 @@ export const siberAmanData = [
   },
   {
     id: 20,
-    kategori: "Keamanan Perangkat & Malware",
+    kategori: "Malware Analysis",
     judul: "Physical Port Blocking: Bahaya USB Juice Jacking",
     image:
       "https://itbox.id/wp-content/uploads/2024/09/juice-jacking-adalah-scaled.jpg",

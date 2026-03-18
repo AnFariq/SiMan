@@ -15,14 +15,14 @@ import {
 
 const ancamanItems = [
     { icon: AlertTriangle, label: "Social Engineering", href: "/category/social-engineering", desc: "Manipulasi psikologis" },
-    { icon: Cpu,           label: "Malware Analysis",   href: "/category/malware-analysis",   desc: "Bedah software berbahaya" },
-    { icon: Radio,         label: "Network Security",   href: "/category/network-security",   desc: "Keamanan lalu lintas data" },
-    { icon: Lock,          label: "Web Vulnerability",  href: "/category/web-vulnerability",  desc: "Celah aplikasi web" },
+    { icon: Cpu, label: "Malware Analysis", href: "/category/malware-analysis", desc: "Bedah software berbahaya" },
+    { icon: Radio, label: "Network Security", href: "/category/network-security", desc: "Keamanan lalu lintas data" },
+    { icon: Lock, label: "Web Vulnerability", href: "/category/web-vulnerability", desc: "Celah aplikasi web" },
 ];
 
 export default function Header() {
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [scrolled, setScrolled]     = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
 
     const handleScroll = useCallback(() => {
@@ -41,16 +41,15 @@ export default function Header() {
         return () => { document.body.style.overflow = ""; };
     }, [mobileOpen]);
 
-    const isActive        = (path) => location.pathname === path;
+    const isActive = (path) => location.pathname === path;
     const isPanduanActive = location.pathname.startsWith("/category");
 
     return (
         <>
-            <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
-                scrolled
+            <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${scrolled
                     ? "bg-[#080F1E]/90 backdrop-blur-md border-b border-white/[0.08] shadow-[0_4px_24px_rgba(0,0,0,0.4)]"
                     : "bg-transparent border-b border-transparent"
-            }`}>
+                }`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center h-16">
 
@@ -67,30 +66,38 @@ export default function Header() {
                             <nav className="hidden md:flex items-center gap-1">
                                 <NavLink to="/" label="Beranda" active={isActive("/")} />
 
+                                {/* Dropdown Category */}
                                 <div className="relative group">
                                     <button className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200
-                                        hover:bg-white/[0.06] hover:text-slate-100
-                                        ${isPanduanActive ? "text-cyan-400 bg-cyan-500/[0.08]" : "text-slate-400"}`}>
+        hover:bg-white/[0.06] hover:text-slate-100
+        ${isPanduanActive ? "text-cyan-400 bg-cyan-500/[0.08]" : "text-slate-400"}`}>
                                         Category
-                                        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180
-                                            ${isPanduanActive ? "text-cyan-400" : "text-slate-500"}`} />
+                                        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 group-hover:rotate-180
+            ${isPanduanActive ? "text-cyan-400" : "text-slate-500"}`} />
                                     </button>
 
-                                    <div className="absolute top-full left-0 mt-3 w-[460px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0 pointer-events-none group-hover:pointer-events-auto">
-                                        <div className="h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent" />
-                                        <div className="bg-[#0D1B30]/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-3 shadow-[0_16px_48px_rgba(0,0,0,0.6)] grid grid-cols-2 gap-2">
+                                    {/* Dropdown Menu Container */}
+                                    <div className="absolute top-full left-0 pt-3 w-[460px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-[110]">
+
+                                        {/* Invisible Bridge: Menghubungkan button dengan menu agar tidak terputus saat kursor lewat */}
+                                        <div className="absolute top-0 left-0 right-0 h-3" />
+
+                                        <div className="relative bg-[#0D1B30]/95 backdrop-blur-xl border border-white/[0.08] rounded-2xl p-3 shadow-[0_20px_50px_rgba(0,0,0,0.7)] grid grid-cols-2 gap-2">
+                                            {/* Dekorasi Garis Atas */}
+                                            <div className="absolute -top-[1px] left-10 right-10 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent" />
+
                                             {ancamanItems.map((item) => (
                                                 <Link
                                                     key={item.label}
                                                     to={item.href}
                                                     className={`flex items-start gap-3 p-3 rounded-xl transition-all duration-200 group/item
-                                                        ${isActive(item.href)
+                        ${isActive(item.href)
                                                             ? "bg-cyan-500/[0.1] border border-cyan-500/20"
                                                             : "hover:bg-white/[0.05] border border-transparent hover:border-white/[0.06]"
                                                         }`}
                                                 >
                                                     <div className={`p-2 rounded-lg transition-all duration-200 flex-shrink-0
-                                                        ${isActive(item.href)
+                        ${isActive(item.href)
                                                             ? "bg-cyan-500/20 text-cyan-400"
                                                             : "bg-white/[0.05] text-slate-500 group-hover/item:bg-cyan-500/10 group-hover/item:text-cyan-400"
                                                         }`}>
@@ -100,7 +107,7 @@ export default function Header() {
                                                         <p className={`text-sm font-medium ${isActive(item.href) ? "text-cyan-400" : "text-slate-200"}`}>
                                                             {item.label}
                                                         </p>
-                                                        <p className="text-[11px] text-slate-500 mt-0.5">{item.desc}</p>
+                                                        <p className="text-[11px] text-slate-500 mt-0.5 leading-relaxed">{item.desc}</p>
                                                     </div>
                                                 </Link>
                                             ))}
@@ -141,11 +148,10 @@ export default function Header() {
 
             {createPortal(
                 <div
-                    className={`md:hidden fixed inset-0 transition-all duration-300 ${
-                        mobileOpen
+                    className={`md:hidden fixed inset-0 transition-all duration-300 ${mobileOpen
                             ? "opacity-100 visible pointer-events-auto"
                             : "opacity-0 invisible pointer-events-none"
-                    }`}
+                        }`}
                     style={{ zIndex: 9999 }}
                 >
                     <div
@@ -173,7 +179,7 @@ export default function Header() {
                         </div>
 
                         <div className="flex flex-col gap-1 px-4 py-4 flex-1 overflow-y-auto">
-                            <MobileNavLink to="/"        label="Beranda"      active={isActive("/")} />
+                            <MobileNavLink to="/" label="Beranda" active={isActive("/")} />
                             <MobileNavLink to="/tentang" label="Tentang Kami" active={isActive("/tentang")} />
                             <MobileNavLink to="/library" label="Perpustakaan" active={isActive("/library")} />
 

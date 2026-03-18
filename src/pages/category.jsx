@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { siberAmanData } from "../data/DataSheet";
 import { ArrowRight, ShieldAlert, BookOpen, ChevronRight } from "lucide-react";
 import Header from "../components/Header";
@@ -8,12 +8,19 @@ import Footer from "../components/Footer";
 
 const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+    visible: { 
+        opacity: 1, 
+        transition: { staggerChildren: 0.1, delayChildren: 0.2 } 
+    }
 };
 
 const cardVariants = {
-    hidden: { opacity: 0, y: 24 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } }
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+        opacity: 1, 
+        y: 0, 
+        transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } 
+    }
 };
 
 const riskColor = {
@@ -24,12 +31,23 @@ const riskColor = {
 };
 
 export default function CategoryPage({ targetCategory, description }) {
-    const filteredData = siberAmanData.filter(
-        (item) => item.kategori === targetCategory
-    );
+    // State untuk menampung data yang sudah difilter
+    const [filteredData, setFilteredData] = useState([]);
+
+    // Logic Auto-Refresh saat targetCategory berubah
+    useEffect(() => {
+        const data = siberAmanData.filter(
+            (item) => item.kategori === targetCategory
+        );
+        setFilteredData(data);
+
+        // Opsional: Scroll ke atas otomatis saat ganti kategori agar tidak stuck di posisi bawah
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [targetCategory]);
 
     return (
         <div className="min-h-screen bg-[#080F1E] text-slate-100 font-sans relative overflow-hidden">
+            {/* Background Decorations */}
             <div
                 className="fixed inset-0 pointer-events-none z-0"
                 style={{
@@ -49,7 +67,9 @@ export default function CategoryPage({ targetCategory, description }) {
             <Header />
 
             <main className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-28">
+                {/* Header Section dengan Key untuk Animasi Ulang */}
                 <motion.div
+                    key={`header-${targetCategory}`}
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -64,7 +84,7 @@ export default function CategoryPage({ targetCategory, description }) {
                         <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" />
                     </Link>
 
-                    <p className="inline-flex items-center gap-2.5 text-[11px] font-medium text-cyan-400 tracking-widest uppercase mb-4 block">
+                    <p className="inline-flex items-center gap-2.5 text-[11px] font-medium text-cyan-400 tracking-widest uppercase mb-4">
                         <span className="block w-5 h-px bg-cyan-400" />
                         Kategori Artikel
                     </p>
@@ -81,90 +101,94 @@ export default function CategoryPage({ targetCategory, description }) {
                     </p>
 
                     <div className="mt-8 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/[0.07] bg-white/[0.03] text-sm text-slate-400">
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                         {filteredData.length} artikel tersedia
                     </div>
                 </motion.div>
 
-                {filteredData.length > 0 ? (
-                    <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate="visible"
-                        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                    >
-                        {filteredData.map((article) => {
-                            const risk = article.tingkat_risiko?.toLowerCase();
-                            const riskClass = riskColor[risk] || riskColor.medium;
-
-                            return (
-                                <motion.div
-                                    key={article.id}
-                                    variants={cardVariants}
-                                    whileHover={{ y: -5 }}
-                                    transition={{ duration: 0.25 }}
-                                    className="group relative flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.03] hover:border-cyan-500/25 hover:bg-white/[0.05] overflow-hidden transition-colors duration-300"
-                                >
-                                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
-                                    
-                                    <div className="relative h-48 overflow-hidden bg-white/[0.02]">
-                                        <img
-                                            src={article.image}
-                                            alt={article.judul}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 group-hover:opacity-100"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#080F1E]/60 to-transparent" />
-
-                                        <div className="absolute top-3 right-3">
-                                            <span className={`px-2.5 py-1 rounded-full text-[10px] font-medium uppercase tracking-wider border backdrop-blur-sm ${riskClass}`}>
-                                                {article.tingkat_risiko} Risk
-                                            </span>
-                                        </div>
-                                    </div>
-
-                                    <div className="p-6 flex-1 flex flex-col">
-                                        <h3 className="text-[17px] font-semibold text-slate-100 mb-3 leading-snug tracking-tight group-hover:text-cyan-300 transition-colors duration-200">
-                                            {article.judul}
-                                        </h3>
-                                        <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3 font-light">
-                                            {article.deskripsi}
-                                        </p>
-
-                                        <Link
-                                            to={`/artikel/${article.id}`}
-                                            className="mt-auto inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-medium transition-all duration-300
-                                                border border-white/[0.07] bg-white/[0.03] text-slate-400
-                                                hover:bg-gradient-to-r hover:from-blue-600 hover:to-cyan-500 hover:text-white hover:border-transparent hover:shadow-[0_0_20px_rgba(0,114,255,0.3)]"
-                                        >
-                                            Pelajari Celah
-                                            <ArrowRight className="w-4 h-4" />
-                                        </Link>
-                                    </div>
-                                </motion.div>
-                            );
-                        })}
-                    </motion.div>
-                ) : (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="py-24 text-center rounded-2xl border border-dashed border-white/[0.08]"
-                    >
-                        <div className="w-16 h-16 rounded-2xl bg-white/[0.04] border border-white/[0.07] flex items-center justify-center mx-auto mb-5">
-                            <ShieldAlert className="w-7 h-7 text-slate-600" />
-                        </div>
-                        <p className="text-slate-500 font-light text-base mb-2">Belum ada artikel untuk kategori ini.</p>
-                        <p className="text-slate-600 text-sm">Konten sedang dipersiapkan, cek kembali nanti.</p>
-                        <Link
-                            to="/library"
-                            className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-xl border border-white/[0.07] bg-white/[0.03] text-sm text-slate-400 hover:text-cyan-400 hover:border-cyan-500/25 transition-all duration-200"
+                {/* Grid Artikel */}
+                <AnimatePresence mode="wait">
+                    {filteredData.length > 0 ? (
+                        <motion.div
+                            key={`grid-${targetCategory}`}
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit={{ opacity: 0 }}
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                         >
-                            <BookOpen className="w-4 h-4" />
-                            Kembali ke Library
-                        </Link>
-                    </motion.div>
-                )}
+                            {filteredData.map((article) => {
+                                const risk = article.tingkat_risiko?.toLowerCase();
+                                const riskClass = riskColor[risk] || riskColor.medium;
+
+                                return (
+                                    <motion.div
+                                        key={article.id}
+                                        variants={cardVariants}
+                                        whileHover={{ y: -8 }}
+                                        className="group relative flex flex-col rounded-2xl border border-white/[0.06] bg-white/[0.03] hover:border-cyan-500/25 hover:bg-white/[0.05] overflow-hidden transition-all duration-300"
+                                    >
+                                        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10" />
+                                        
+                                        <div className="relative h-48 overflow-hidden bg-white/[0.02]">
+                                            <img
+                                                src={article.image}
+                                                alt={article.judul}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#080F1E]/60 to-transparent" />
+                                            <div className="absolute top-3 right-3">
+                                                <span className={`px-2.5 py-1 rounded-full text-[10px] font-medium uppercase tracking-wider border backdrop-blur-md ${riskClass}`}>
+                                                    {article.tingkat_risiko} Risk
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div className="p-6 flex-1 flex flex-col">
+                                            <h3 className="text-[17px] font-semibold text-slate-100 mb-3 leading-snug group-hover:text-cyan-300 transition-colors duration-200">
+                                                {article.judul}
+                                            </h3>
+                                            <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-3 font-light">
+                                                {article.deskripsi}
+                                            </p>
+
+                                            <Link
+                                                to={`/artikel/${article.id}`}
+                                                className="mt-auto inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-medium transition-all duration-300
+                                                    border border-white/[0.07] bg-white/[0.03] text-slate-400
+                                                    hover:bg-gradient-to-r hover:from-blue-600 hover:to-cyan-500 hover:text-white hover:border-transparent hover:shadow-[0_0_25px_rgba(0,114,255,0.4)]"
+                                            >
+                                                Pelajari Celah
+                                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                            </Link>
+                                        </div>
+                                    </motion.div>
+                                );
+                            })}
+                        </motion.div>
+                    ) : (
+                        /* Empty State */
+                        <motion.div
+                            key={`empty-${targetCategory}`}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="py-24 text-center rounded-2xl border border-dashed border-white/[0.08]"
+                        >
+                            <div className="w-16 h-16 rounded-2xl bg-white/[0.04] border border-white/[0.07] flex items-center justify-center mx-auto mb-5">
+                                <ShieldAlert className="w-7 h-7 text-slate-600" />
+                            </div>
+                            <p className="text-slate-500 font-light text-base mb-2">Belum ada artikel untuk kategori ini.</p>
+                            <p className="text-slate-600 text-sm">Konten sedang dipersiapkan, cek kembali nanti.</p>
+                            <Link
+                                to="/library"
+                                className="inline-flex items-center gap-2 mt-8 px-6 py-3 rounded-xl border border-white/[0.07] bg-white/[0.03] text-sm text-slate-400 hover:text-cyan-400 hover:border-cyan-500/25 transition-all duration-200"
+                            >
+                                <BookOpen className="w-4 h-4" />
+                                Kembali ke Library
+                            </Link>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </main>
 
             <Footer />
